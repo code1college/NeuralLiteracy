@@ -1,0 +1,22 @@
+body {
+    color: white;
+    background: rgb(52, 113, 173);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #2776b8, #233e96, #2826a8);
+}
+#stepOne, #stepTwo, #stepThree {
+    width: 50%;
+    height: auto;
+}
+
+#stepOneBox {
+    text-align: left;
+}
+
+#stepTwoBox {
+    text-align: right;
+}
+
+header {
+    text-align: center;
+}

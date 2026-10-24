@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>NeuralLiteracy</title>
+        <link rel="icon" type="image/jpeg" href="neuralLogo.jpeg">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <script src="utils.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+        <script src="network.js"></script>
+        <script src="main.js"></script>
+    </head>
+    <body onload="main()">
+        <header>
+            <h1>NeuralLiteracy</h1>
+            <p>Developed by <i>Saurav Behera</i></p>
+            <p>Optimizer is SGD</p>
+            <p>Click <a href="help.html">Here</a> for Help</p>
+            <img src="neuralLogo.jpeg" width="150px" height="150px">
+        </header>
+        <main>
+            <div id="inputBody">
+                <a href="https://www.geeksforgeeks.org/machine-learning/ml-stochastic-gradient-descent-sgd/">Click Here for Help on Selecting: </a>
+                <label>How many iterations?: </label>
+                <input type="text" id="iterationsToLearn" placeholder="Ex: 500">
+                <br>
+                <br>
+                <a href="https://medium.com/@CodeCraftAI/a-systematic-approach-to-finding-the-optimal-learning-rate-869024f3bb7d">Click Here for Help on Selecting: </a>
+                <label>Learning Rate: </label>
+                <input type="text" id="rateToLearn" placeholder="Ex: 0.01">
+                <br>
+                <br>
+                <label>Choose how many input variables you want: </label>
+                <select id="inputVariablesMax">
+                    <option value="choose">Choose</option>
+                    <option value="one">1</option>
+                    <option value="two">2</option>
+                    <option value="three">3</option>
+                </select>
+                <br>
+                <br>
+                <a href="https://medium.com/@elmahfoudradwane/choosing-the-right-loss-function-mse-vs-mae-in-regression-problems-199e37d25e7b">Click Here for Help on Selecting: </a>
+                <label>Type of Error: </label>
+                <select id="typeOfError">
+                    <option>Choose</option>
+                    <option value="MAE">MAE</option>
+                    <option value="MSE">MSE</option>
+                </select>
+                <br>
+                <br>
+                <a href="https://stats.stackexchange.com/questions/181/how-to-choose-the-number-of-hidden-layers-and-nodes-in-a-feedforward-neural-netw">Click Here for Help on Selecting: </a>
+                <label>Nodes in Hidden Layer: </label>
+                <select id="nodesInHidden">
+                    <option value="none">None</option>
+                    <option value="one">1</option>
+                    <option value="two">2</option>
+                </select>
+                <br>
+                <br>
+                <a href="https://www.geeksforgeeks.org/machine-learning/ml-classification-vs-regression/">Click Here for Help on Selecting: </a>
+                <label>Type of Network: </label>
+                <select id="typeOfNetwork">
+                    <option value="choose">Choose</option>
+                    <option value="regression">Regression</option>
+                    <option value="binary">Binary</option>
+                </select>
+                <br>
+                <br>
+                <a href="https://odsc.medium.com/how-to-choose-the-right-activation-function-for-neural-networks-173e808729d4">Click Here for Help on Selecting: </a>
+                <label>Type of Hidden Layer Activation Function</label>
+                <select id="typeOfActivationHidden">
+                    <option value="none">None</option>
+                    <option value="relu">ReLU</option>
+                    <option value="leakyReLU">Leaky ReLU</option>
+                </select>
+                <br>
+                <br>
+                <label>For how many iterations do you want to plot the error to the graph? </label>
+                <input type="text" id="moduloIteration" placeholder="Ex: 10">
+                <br>
+                <br>
+                <label>X1:</label>
+                <input type="text" id="variable1" placeholder="Feature 1: ">
+                <br>
+                <br>
+                <label>X2:</label>
+                <input type="text" id="variable2" placeholder="Feature 2: ">
+                <br>
+                <br>
+                <label>X3:</label>
+                <input type="text" id="variable3" placeholder="Feature 3: ">
+                <br>
+                <br>
+                <label>Y1:</label>
+                <input type="text" id="y1" placeholder="Target: ">
+                <br>
+                <br>
+                <input type="file" accept=".csv" id="csvFileInput">
+                <br>
+                <br>
+                <p id="dataView"></p>
+                <br>
+                <br>
+                <button onclick="sendVariables()">Send Data / Start Data Processing➡️</button>
+                <br>
+                <br>
+                <button onclick="initiateGraph()" id="btnStart">Start Graph Creation and First Network🌐</button>
+                <br>
+                <br>
+                <button onclick="computeNetwork()">Update!♻️</button>
+                <br>
+                <br>
+                <button onclick="deleteVariables()">Delete🗑️</button>
+                <br>
+                <br>
+                <p id="networkParametersView"></p>
+                <p id="errorView"></p>
+                <br>
+                <br>
+                <button onclick="saveNetwork()">Save💾</button>
+                <br>
+                <br>
+            </div>
+            <br>
+            <br>
+            <div id="predictionBox">
+                <label>X1:</label>
+                <input type="text" id="variable1Pred" placeholder="Feature 1: ">
+                <br>
+                <br>
+                <label>X2:</label>
+                <input type="text" id="variable2Pred" placeholder="Feature 2: ">
+                <br>
+                <br>
+                <label>X3:</label>
+                <input type="text" id="variable3Pred" placeholder="Feature 3: ">
+                <br>
+                <br>
+            </div>
+            <br>
+            <br>
+            <button onclick="predictNewPoint()" id="predictNewNetwork">Predict🔮</button>
+            <br>
+            <br>
+            <button onclick="predictionOnOldNetwork()" id="predictionOnOldNetwork">Predict on Old Network🎱</button>
+            <br>
+            <br>
+            <button onclick="deleteNetwork()" id="deleteNetwork">Delete Network❌</button>
+            <br>
+            <br>
+            <p id="predictOutput"></p>
+            <canvas id="myCanvas" width="200px" height="150px"></canvas>
+        </main>
+    </body>
+</html>
